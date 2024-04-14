@@ -20,3 +20,9 @@ rad.json
 *.flf
 #Test results file
 TestResults.xml
+#Node Modules
+node_modules/
+#DS_Store files
+.DS_Store
+#Idea
+.idea/
