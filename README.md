@@ -1,7 +1,7 @@
 # LearnReact
 
 For running each project, you need to install the dependencies first.
-You can do this by running a following command in the project directory.
+You can do this by running the following commands in the project directory.
 
 1. Navigate to the directory:
     ```bash
