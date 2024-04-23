@@ -1,5 +1,6 @@
-import { useEffect } from "react";
-import ProgressBar from "./ProgressBar.jsx";
+import { useEffect } from 'react';
+
+import ProgressBar from './ProgressBar.jsx';
 
 const TIMER = 3000;
 
