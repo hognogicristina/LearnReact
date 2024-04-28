@@ -1,11 +1,11 @@
-const { sign, verify } = require('jsonwebtoken');
-const { compare } = require('bcryptjs');
-const { NotAuthError } = require('./errors');
+const { sign, verify } = require("jsonwebtoken");
+const { compare } = require("bcryptjs");
+const { NotAuthError } = require("./errors");
 
-const KEY = 'supersecret';
+const KEY = "supersecret";
 
 function createJSONToken(email) {
-  return sign({ email }, KEY, { expiresIn: '1h' });
+  return sign({ email }, KEY, { expiresIn: "1h" });
 }
 
 function validateJSONToken(token) {
@@ -17,26 +17,22 @@ function isValidPassword(password, storedPassword) {
 }
 
 function checkAuthMiddleware(req, res, next) {
-  if (req.method === 'OPTIONS') {
+  if (req.method === "OPTIONS") {
     return next();
   }
   if (!req.headers.authorization) {
-    console.log('NOT AUTH. AUTH HEADER MISSING.');
-    return next(new NotAuthError('Not authenticated.'));
+    return next(new NotAuthError("Not authenticated."));
   }
-  const authFragments = req.headers.authorization.split(' ');
+  const authFragments = req.headers.authorization.split(" ");
 
   if (authFragments.length !== 2) {
-    console.log('NOT AUTH. AUTH HEADER INVALID.');
-    return next(new NotAuthError('Not authenticated.'));
+    return next(new NotAuthError("Not authenticated."));
   }
   const authToken = authFragments[1];
   try {
-    const validatedToken = validateJSONToken(authToken);
-    req.token = validatedToken;
+    req.token = validateJSONToken(authToken);
   } catch (error) {
-    console.log('NOT AUTH. TOKEN INVALID.');
-    return next(new NotAuthError('Not authenticated.'));
+    return next(new NotAuthError("Not authenticated."));
   }
   next();
 }
